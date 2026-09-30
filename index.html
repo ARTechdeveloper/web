@@ -79,7 +79,7 @@
     .menu-toggle { display: none; width: 43px; height: 43px; border: 1px solid var(--line); border-radius: 13px; color: var(--text); background: rgba(255,255,255,.06); cursor: pointer; font-size: 1.2rem; }
     .mobile-menu { display: none; }
 
-    .top-banner { width: min(var(--max), calc(100% - 40px)); height: 154px; margin: 18px auto 0; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: #081022; box-shadow: 0 20px 55px rgba(0,0,0,.25); }
+    .top-banner { width: min(var(--max), calc(100% - 40px)); height: 154px; margin: 18px auto 0; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,.14); border-radius: 24px; background: #081022 url('images/feature-graphic.png') center / cover no-repeat; box-shadow: 0 20px 55px rgba(0,0,0,.25); }
     .top-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,8,20,.12), transparent 45%, rgba(5,8,20,.18)); pointer-events: none; }
     .top-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .96; }
     .top-banner-label { position: absolute; z-index: 1; right: 22px; bottom: 16px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.15); border-radius: 10px; color: #f2f5ff; background: rgba(7,11,28,.72); backdrop-filter: blur(12px); font-size: .75rem; font-weight: 800; }
@@ -101,7 +101,7 @@
 
     .hero-art { position: relative; min-height: 640px; display: grid; place-items: center; perspective: 1400px; }
     .hero-art::before { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--violet), var(--pink)); filter: blur(90px); opacity: .24; animation: heroGlow 5.5s ease-in-out infinite; }
-    .art-card { position: relative; width: min(100%, 530px); transform: rotateY(-8deg) rotateX(3deg) rotateZ(2deg); transition: transform .55s ease; filter: drop-shadow(30px 35px 35px rgba(0,0,0,.45)); animation: heroFloat 6s ease-in-out 1s infinite; }
+    .art-card { position: relative; width: min(100%, 420px); transform: rotateY(-8deg) rotateX(3deg) rotateZ(2deg); transition: transform .55s ease; filter: drop-shadow(30px 35px 35px rgba(0,0,0,.45)); animation: heroFloat 6s ease-in-out 1s infinite; }
     .hero-art:hover .art-card { animation-play-state: paused; transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateY(-7px); }
     .art-card img { width: 100%; border-radius: 30px; border: 1px solid rgba(255,255,255,.22); box-shadow: 0 0 0 9px rgba(255,255,255,.035), 0 0 48px rgba(92, 240, 255, .15); }
     .art-badge { position: absolute; right: -18px; bottom: 34px; padding: 13px 16px; border-radius: 16px; background: rgba(11, 15, 35, .84); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 18px 40px rgba(0,0,0,.35); backdrop-filter: blur(15px); }
@@ -250,7 +250,7 @@
       .hero-copy { text-align: center; }
       .hero-copy p { margin-inline: auto; }
       .actions { justify-content: center; }
-      .hero-art { min-height: 500px; }
+      .hero-art { min-height: 430px; }
       .top-banner { height: 128px; margin-top: 14px; }
       .feature-grid { grid-template-columns: repeat(2, 1fr); }
       .workflow-grid, .outputs { grid-template-columns: repeat(2, 1fr); }
@@ -274,8 +274,8 @@
       .hero { min-height: calc(100vh - 64px); padding: 48px 0 54px; gap: 34px; }
       .hero-copy h1 { font-size: clamp(3.2rem, 5.6vw, 5.35rem); margin-top: 14px; }
       .hero-copy p { font-size: 1rem; line-height: 1.65; margin-bottom: 23px; }
-      .hero-art { min-height: 525px; }
-      .art-card { width: min(100%, 445px); }
+      .hero-art { min-height: 430px; }
+      .art-card { width: min(100%, 330px); }
       .hero-note { margin-top: 20px; }
       .hero-metrics { margin-top: 21px; }
       section { padding: 82px 0; }
@@ -289,9 +289,9 @@
       .hero { min-height: auto; padding: 54px 0 40px; }
       .hero-copy h1 { font-size: clamp(3rem, 15vw, 4.6rem); }
       .hero-copy p { font-size: 1rem; }
-      .hero-art { min-height: 420px; }
-      .art-card { width: 95%; }
-      .art-badge { right: 0; bottom: 12px; }
+      .hero-art { min-height: 335px; }
+      .art-card { width: min(78%, 270px); }
+      .art-badge { right: -7px; bottom: 12px; padding: 10px 12px; }
       section { padding: 75px 0; }
       .section-heading h2, .showcase-copy h2, .download h2 { font-size: 2.65rem; }
       .feature-grid, .gallery { grid-template-columns: 1fr; }
