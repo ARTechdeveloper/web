@@ -204,8 +204,8 @@
 
     .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; align-items: start; }
     .gallery figure { margin: 0; padding: 8px; border-radius: 25px; border: 1px solid var(--line); background: rgba(255,255,255,.045); box-shadow: 0 22px 50px rgba(0,0,0,.22); }
-    .gallery figure:nth-child(2) { transform: translateY(38px); }
-    .gallery img { width: 100%; border-radius: 19px; }
+    .gallery figure:nth-child(2), .gallery figure:nth-child(5) { transform: translateY(38px); }
+    .gallery img { width: 100%; height: 360px; border-radius: 19px; object-fit: contain; object-position: center; background: radial-gradient(circle at 50% 20%, rgba(93,246,255,.11), transparent 58%), #080b18; }
     .gallery figcaption { padding: 13px 9px 8px; color: #dfe4fa; font-size: .86rem; font-weight: 750; }
     .gallery figcaption span { display: block; color: #8792b3; font-size: .76rem; font-weight: 500; margin-top: 3px; }
 
@@ -289,8 +289,9 @@
       .section-heading h2, .showcase-copy h2, .download h2 { font-size: 2.65rem; }
       .feature-grid, .gallery { grid-template-columns: 1fr; }
       .workflow-grid, .outputs, .trust-row { grid-template-columns: 1fr; }
-      .gallery figure:nth-child(2) { transform: none; }
-      .gallery figure { max-width: 430px; margin-inline: auto; }
+      .gallery figure:nth-child(2), .gallery figure:nth-child(5) { transform: none; }
+      .gallery figure { max-width: 390px; margin-inline: auto; }
+      .gallery img { height: 420px; }
       .theme-grid { grid-template-columns: repeat(2, 1fr); }
       .check-grid { grid-template-columns: 1fr; }
       .tool-list { grid-template-columns: 1fr; }
@@ -521,6 +522,9 @@
           <p>Explore the editing, live preview and widget-making experiences behind ART Icon Changer &amp; Editor.</p>
         </div>
         <div class="gallery">
+          <figure><img src="images/personalize.png" alt="ART Icon Editor installed apps list with personalised icon previews" loading="lazy" /><figcaption>Personalize apps<span>Installed apps and edited icon previews</span></figcaption></figure>
+          <figure><img src="images/love-theme.png" alt="ART Icon Editor Love Theme icon collection" loading="lazy" /><figcaption>Love Theme<span>A complete romantic icon collection</span></figcaption></figure>
+          <figure><img src="images/neon-glow.png" alt="ART Icon Editor Neon Glow icon collection" loading="lazy" /><figcaption>Neon Glow<span>Bright, colourful icons with a cyber look</span></figcaption></figure>
           <figure><img src="images/live-preview.png" alt="ART Icon Editor live preview and Tune and Adjust controls" loading="lazy" /><figcaption>Live Preview<span>Fine-tune your design in real time</span></figcaption></figure>
           <figure><img src="images/tune-adjust.png" alt="ART Icon Editor filters, shapes, scale and rotation screen" loading="lazy" /><figcaption>Fine-tune &amp; adjust<span>Filters, shapes, scale and rotation</span></figcaption></figure>
           <figure><img src="images/widget-maker.png" alt="ART Icon Editor widget maker for 1x1, 2x2 and 3x3 widgets" loading="lazy" /><figcaption>Small icons. Big widgets.<span>1×1 • 2×2 • 3×3 widget maker</span></figcaption></figure>
