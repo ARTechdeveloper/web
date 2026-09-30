@@ -1,1208 +1,438 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>AR Techdeveloper | ART Icon Changer & Editor</title>
-
-  <meta
-    name="description"
-    content="AR Techdeveloper - Creator of ART Icon Changer & Editor. Create custom icons, 3D icons, widgets and beautiful home screen designs."
-  />
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070a18" />
+  <meta name="description" content="ART Icon Changer & Editor by AR Techdeveloper — create custom icons, Blank Canvas designs, 3D effects and home-screen widgets." />
+  <meta property="og:title" content="ART Icon Changer & Editor | AR Techdeveloper" />
+  <meta property="og:description" content="Create custom icons, 3D designs and widgets for a home screen that feels like you." />
+  <meta property="og:type" content="website" />
+  <title>ART Icon Changer & Editor | AR Techdeveloper</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%2300e5ff'/%3E%3Cstop offset='.5' stop-color='%237c54ff'/%3E%3Cstop offset='1' stop-color='%23ff3fcf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='%23070a18'/%3E%3Cpath d='M17 45 29 15h7l12 30h-7l-2.5-7H26.5L24 45Zm12-13h7l-3.5-10Z' fill='url(%23g)'/%3E%3C/svg%3E" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg: #060814;
+      --surface: rgba(15, 20, 42, .72);
+      --surface-strong: #10162d;
+      --text: #f7f8ff;
+      --muted: #a9b2cf;
+      --line: rgba(255,255,255,.12);
+      --cyan: #5df6ff;
+      --violet: #8e6bff;
+      --pink: #ff58d2;
+      --gold: #ffd16a;
+      --max: 1180px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      color: var(--text);
       background:
-        radial-gradient(circle at 20% 20%, #211057 0, transparent 35%),
-        radial-gradient(circle at 80% 10%, #4b0b69 0, transparent 30%),
-        radial-gradient(circle at 70% 80%, #052b4d 0, transparent 35%),
-        #050711;
-      color: white;
+        radial-gradient(circle at 12% 8%, rgba(0, 224, 255, .14), transparent 28rem),
+        radial-gradient(circle at 88% 16%, rgba(142, 107, 255, .18), transparent 30rem),
+        radial-gradient(circle at 55% 92%, rgba(255, 88, 210, .10), transparent 32rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
       overflow-x: hidden;
     }
 
-    /* =========================
-       NAVIGATION
-    ========================== */
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 75px;
-      padding: 0 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(5, 7, 17, 0.72);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      z-index: 999;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 22px;
-      font-weight: 800;
-      text-decoration: none;
-      color: white;
-    }
-
-    .brand-logo {
-      width: 45px;
-      height: 45px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: linear-gradient(
-        135deg,
-        #00eaff,
-        #7c3cff,
-        #ff2ad4
-      );
-      box-shadow:
-        0 0 20px rgba(0,234,255,.35),
-        0 0 35px rgba(255,42,212,.2);
-      font-weight: 900;
-    }
-
-    .brand span {
-      background: linear-gradient(90deg, #65f8ff, #b47cff, #ff74dc);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-    }
-
-    nav ul a {
-      text-decoration: none;
-      color: #d9dbef;
-      font-size: 14px;
-      font-weight: 600;
-      transition: .3s;
-    }
-
-    nav ul a:hover {
-      color: #67f7ff;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .hero {
-      min-height: 100vh;
-      padding: 130px 8% 70px;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center;
-      gap: 70px;
-      position: relative;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
-      background: #8b2cff;
-      filter: blur(150px);
-      opacity: .15;
-      left: -150px;
-      top: 250px;
-    }
-
-    .developer-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 16px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 50px;
-      color: #8cf8ff;
-      margin-bottom: 22px;
-      font-size: 14px;
-    }
-
-    .developer-tag::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      background: #53ff9e;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #53ff9e;
-    }
-
-    .hero h1 {
-      font-size: clamp(45px, 7vw, 88px);
-      line-height: .98;
-      letter-spacing: -3px;
-      margin-bottom: 22px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(
-        90deg,
-        #4ff4ff,
-        #8f75ff,
-        #ff47cf
-      );
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      color: #adb2cc;
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 30px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 26px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 700;
-      transition: .3s;
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(
-        90deg,
-        #00b7ff,
-        #7447ff,
-        #ef29cf
-      );
-      box-shadow:
-        0 12px 35px rgba(93,69,255,.32);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow:
-        0 17px 45px rgba(93,69,255,.48);
-    }
-
-    .btn-secondary {
-      color: #e7e8f7;
-      border: 1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.05);
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,.1);
-      transform: translateY(-3px);
-    }
-
-    /* =========================
-       PHONE 3D EFFECT
-    ========================== */
-
-    .phone-area {
-      display: flex;
-      justify-content: center;
-      perspective: 1500px;
-      position: relative;
-    }
-
-    .phone-glow {
-      position: absolute;
-      width: 330px;
-      height: 450px;
-      background: linear-gradient(
-        45deg,
-        #00eaff,
-        #7c36ff,
-        #ff2ac8
-      );
-      filter: blur(110px);
-      opacity: .28;
-    }
-
-    .phone {
-      width: min(310px, 75vw);
-      background: #070812;
-      border-radius: 40px;
-      padding: 10px;
-      position: relative;
-
-      transform:
-        rotateY(-13deg)
-        rotateX(7deg)
-        rotateZ(3deg);
-
-      box-shadow:
-        30px 35px 60px rgba(0,0,0,.65),
-        0 0 0 2px rgba(255,255,255,.13),
-        0 0 35px rgba(122,65,255,.35);
-
-      animation: phoneFloat 5s ease-in-out infinite;
-    }
-
-    .phone img {
-      width: 100%;
-      display: block;
-      border-radius: 32px;
-      aspect-ratio: 9 / 19.3;
-      object-fit: cover;
-      background: #111;
-    }
-
-    .phone::after {
-      content: "";
-      position: absolute;
-      width: 90px;
-      height: 5px;
-      background: #171821;
-      border-radius: 50px;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    @keyframes phoneFloat {
-      0%, 100% {
-        transform:
-          rotateY(-13deg)
-          rotateX(7deg)
-          rotateZ(3deg)
-          translateY(0);
-      }
-
-      50% {
-        transform:
-          rotateY(-8deg)
-          rotateX(5deg)
-          rotateZ(1deg)
-          translateY(-18px);
-      }
-    }
-
-    /* =========================
-       COMMON SECTIONS
-    ========================== */
-
-    section {
-      padding: 95px 8%;
-    }
-
-    .section-head {
-      text-align: center;
-      max-width: 800px;
-      margin: auto;
-      margin-bottom: 60px;
-    }
-
-    .small-heading {
-      color: #72f7ff;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(35px, 5vw, 55px);
-      margin-bottom: 15px;
-    }
-
-    .section-head p {
-      color: #9da3bd;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       FEATURES
-    ========================== */
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .feature-card {
-      padding: 30px;
-      min-height: 230px;
-      border-radius: 26px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.08),
-          rgba(255,255,255,.025)
-        );
-      border: 1px solid rgba(255,255,255,.1);
-      backdrop-filter: blur(15px);
-      position: relative;
-      overflow: hidden;
-      transition: .35s;
-    }
-
-    .feature-card::before {
-      content: "";
-      width: 120px;
-      height: 120px;
-      position: absolute;
-      top: -50px;
-      right: -50px;
-      border-radius: 50%;
-      background: #7235ff;
-      filter: blur(60px);
-      opacity: .35;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      border-color: rgba(97,240,255,.4);
-      box-shadow: 0 20px 50px rgba(0,0,0,.3);
-    }
-
-    .feature-icon {
-      width: 55px;
-      height: 55px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      font-size: 26px;
-      background: linear-gradient(
-        135deg,
-        rgba(30,220,255,.25),
-        rgba(144,55,255,.35)
-      );
-      border: 1px solid rgba(255,255,255,.15);
-      margin-bottom: 22px;
-    }
-
-    .feature-card h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .feature-card p {
-      color: #9ea4bc;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       SCREENSHOTS
-    ========================== */
-
-    .screenshots-wrapper {
-      overflow-x: auto;
-      padding: 30px 5px 50px;
-    }
-
-    .screenshots {
-      display: flex;
-      gap: 28px;
-      width: max-content;
-      margin: auto;
-      perspective: 1500px;
-    }
-
-    .screen {
-      width: 245px;
-      padding: 7px;
-      border-radius: 30px;
-      background: #06070d;
-      border: 1px solid rgba(255,255,255,.18);
-
-      box-shadow:
-        0 20px 45px rgba(0,0,0,.5),
-        0 0 25px rgba(105,65,255,.15);
-
-      transition: .4s;
-    }
-
-    .screen:nth-child(odd) {
-      transform: rotateY(8deg) rotateX(2deg);
-    }
-
-    .screen:nth-child(even) {
-      transform: rotateY(-8deg) rotateX(2deg);
-    }
-
-    .screen:hover {
-      transform:
-        rotateY(0deg)
-        rotateX(0deg)
-        translateY(-15px)
-        scale(1.05);
-      z-index: 5;
-    }
-
-    .screen img {
-      width: 100%;
-      border-radius: 24px;
-      display: block;
-      aspect-ratio: 9 / 19;
-      object-fit: cover;
-      background: #111;
-    }
-
-    /* =========================
-       SHOWCASE
-    ========================== */
-
-    .showcase {
-      margin: 30px 8%;
-      padding: 70px;
-      border-radius: 40px;
-      background:
-        linear-gradient(
-          120deg,
-          rgba(17,201,255,.14),
-          rgba(107,46,255,.18),
-          rgba(255,29,198,.13)
-        );
-      border: 1px solid rgba(255,255,255,.12);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 60px;
-      overflow: hidden;
-    }
-
-    .showcase h2 {
-      font-size: clamp(35px, 5vw, 55px);
-      margin-bottom: 20px;
-    }
-
-    .showcase p {
-      color: #adb0c6;
-      line-height: 1.7;
-      margin-bottom: 25px;
-    }
-
-    .mini-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .mini-item {
-      padding: 15px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      font-size: 14px;
-    }
-
-    .showcase-image {
-      text-align: center;
-      perspective: 1200px;
-    }
-
-    .showcase-image img {
-      width: min(330px, 100%);
-      border-radius: 35px;
-      transform: rotateY(-13deg) rotateZ(3deg);
-      box-shadow:
-        30px 30px 60px rgba(0,0,0,.6),
-        0 0 40px rgba(92,47,255,.3);
-    }
-
-    /* =========================
-       THEMES
-    ========================== */
-
-    .theme-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 15px;
-    }
-
-    .theme {
-      padding: 20px;
-      border-radius: 18px;
-      text-align: center;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      transition: .3s;
-    }
-
-    .theme:hover {
-      transform: translateY(-6px);
-      background: rgba(255,255,255,.09);
-    }
-
-    /* =========================
-       DOWNLOAD
-    ========================== */
-
-    .download {
-      text-align: center;
-      margin: 70px 8%;
-      padding: 80px 20px;
-      border-radius: 40px;
-
-      background:
-        radial-gradient(circle at top left, rgba(0,234,255,.25), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(255,34,207,.25), transparent 35%),
-        rgba(255,255,255,.045);
-
-      border: 1px solid rgba(255,255,255,.1);
-    }
-
-    .download h2 {
-      font-size: clamp(38px, 5vw, 60px);
-      margin-bottom: 16px;
-    }
-
-    .download p {
-      color: #adb1c7;
-      max-width: 650px;
-      margin: 0 auto 30px;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    footer {
-      padding: 50px 8%;
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: #9499ae;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    footer a {
-      color: #babdd0;
-      text-decoration: none;
-      margin-right: 20px;
-    }
-
-    footer a:hover {
-      color: #63efff;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 950px) {
-
-      nav ul {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .buttons {
-        justify-content: center;
-      }
-
-      .phone-area {
-        margin-top: 30px;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .theme-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .showcase {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 45px 25px;
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      nav {
-        padding: 0 5%;
-      }
-
-      .brand {
-        font-size: 17px;
-      }
-
-      .hero {
-        padding-left: 6%;
-        padding-right: 6%;
-      }
-
-      .hero h1 {
-        letter-spacing: -2px;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
-
-      .theme-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .mini-features {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 70px 6%;
-      }
-
-      .showcase {
-        margin: 20px 5%;
-      }
-
-      .screen {
-        width: 210px;
-      }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: var(--cyan); font-size: .76rem; font-weight: 800;
+      letter-spacing: .16em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 18px var(--cyan); }
+    .gradient {
+      background: linear-gradient(100deg, var(--cyan), #9c86ff 45%, var(--pink));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .muted { color: var(--muted); }
+
+    header {
+      position: sticky; top: 0; z-index: 20;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      background: rgba(6, 8, 20, .75);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    }
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 850; letter-spacing: -.03em; }
+    .brand-mark { width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(135deg, #00dcff, #7753ff 58%, #ff47cd); box-shadow: 0 0 28px rgba(92, 230, 255, .27); }
+    .brand-mark span { font-size: .88rem; font-weight: 950; }
+    .brand-name { font-size: 1.02rem; }
+    nav ul { display: flex; gap: 24px; padding: 0; margin: 0; list-style: none; }
+    nav a { color: #cfd5ed; text-decoration: none; font-size: .88rem; font-weight: 650; }
+    nav a:hover { color: var(--cyan); }
+
+    .hero { min-height: 760px; display: grid; grid-template-columns: .92fr 1.08fr; gap: 54px; align-items: center; padding: 88px 0 76px; }
+    .hero-copy h1 { max-width: 650px; font-size: clamp(3.2rem, 7vw, 6.25rem); letter-spacing: -.075em; line-height: .94; margin: 18px 0 24px; }
+    .hero-copy p { max-width: 610px; color: var(--muted); font-size: 1.11rem; line-height: 1.8; margin: 0 0 30px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; align-items: center; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border-radius: 14px; text-decoration: none; font-size: .92rem; font-weight: 800; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+    .button:hover { transform: translateY(-3px); }
+    .button-primary { background: linear-gradient(105deg, #00c9e8, #7658ff 55%, #ed47c7); box-shadow: 0 13px 35px rgba(104, 84, 255, .28); }
+    .button-primary:hover { box-shadow: 0 18px 45px rgba(104, 84, 255, .42); }
+    .button-ghost { border: 1px solid var(--line); background: rgba(255,255,255,.045); color: #e7eaff; }
+    .hero-note { margin-top: 27px; color: #7f8baa; font-size: .82rem; }
+
+    .hero-art { position: relative; min-height: 640px; display: grid; place-items: center; perspective: 1400px; }
+    .hero-art::before { content: ""; position: absolute; width: 420px; height: 420px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--violet), var(--pink)); filter: blur(90px); opacity: .24; }
+    .art-card { position: relative; width: min(100%, 530px); transform: rotateY(-8deg) rotateX(3deg) rotateZ(2deg); transition: transform .55s ease; filter: drop-shadow(30px 35px 35px rgba(0,0,0,.45)); }
+    .hero-art:hover .art-card { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateY(-7px); }
+    .art-card img { width: 100%; border-radius: 30px; border: 1px solid rgba(255,255,255,.22); box-shadow: 0 0 0 9px rgba(255,255,255,.035), 0 0 48px rgba(92, 240, 255, .15); }
+    .art-badge { position: absolute; right: -18px; bottom: 34px; padding: 13px 16px; border-radius: 16px; background: rgba(11, 15, 35, .84); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 18px 40px rgba(0,0,0,.35); backdrop-filter: blur(15px); }
+    .art-badge strong { display: block; font-size: .9rem; }
+    .art-badge span { color: var(--cyan); font-size: .76rem; }
+
+    section { padding: 105px 0; }
+    .section-heading { max-width: 700px; margin-bottom: 42px; }
+    .section-heading h2 { font-size: clamp(2.4rem, 5vw, 4.4rem); line-height: 1; letter-spacing: -.06em; margin: 15px 0 16px; }
+    .section-heading p { color: var(--muted); max-width: 620px; font-size: 1.03rem; line-height: 1.75; }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { min-height: 216px; padding: 25px; border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+    .feature:hover { transform: translateY(-6px); border-color: rgba(93, 246, 255, .45); background: linear-gradient(145deg, rgba(93,246,255,.11), rgba(255,255,255,.03)); }
+    .feature-icon { width: 48px; height: 48px; display: grid; place-items: center; margin-bottom: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,.14); background: linear-gradient(135deg, rgba(0,225,255,.17), rgba(147,100,255,.28)); font-size: 1.4rem; }
+    .feature h3 { margin: 0 0 9px; font-size: 1.12rem; }
+    .feature p { color: var(--muted); font-size: .9rem; line-height: 1.7; margin: 0; }
+
+    .workflow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: flow; }
+    .workflow-card { position: relative; min-height: 205px; padding: 25px 21px 21px; border: 1px solid var(--line); border-radius: 23px; background: linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025)); overflow: hidden; }
+    .workflow-card::after { counter-increment: flow; content: "0" counter(flow); position: absolute; right: 16px; top: 8px; color: rgba(255,255,255,.1); font-size: 4.6rem; line-height: 1; font-weight: 950; letter-spacing: -.08em; }
+    .workflow-card h3, .workflow-card p { position: relative; z-index: 1; }
+    .workflow-card h3 { margin: 0 0 10px; font-size: 1.05rem; }
+    .workflow-card p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.7; }
+    .workflow-tag { display: inline-flex; margin-bottom: 30px; padding: 6px 9px; border-radius: 9px; color: var(--cyan); background: rgba(93,246,255,.09); border: 1px solid rgba(93,246,255,.2); font-size: .72rem; font-weight: 800; }
+
+    .studio { display: grid; grid-template-columns: 1.08fr .92fr; gap: 18px; align-items: stretch; }
+    .studio-panel { padding: 28px; border: 1px solid var(--line); border-radius: 27px; background: linear-gradient(145deg, rgba(20,28,58,.86), rgba(12,16,33,.76)); }
+    .studio-panel h3 { font-size: 1.35rem; margin: 0 0 9px; }
+    .studio-panel > p { color: var(--muted); margin: 0 0 23px; line-height: 1.75; }
+    .tool-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tool { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.045); color: #e5e9fa; font-size: .84rem; }
+    .tool b { width: 24px; height: 24px; flex: 0 0 24px; display: grid; place-items: center; border-radius: 8px; color: var(--cyan); background: rgba(93,246,255,.12); font-size: .78rem; }
+    .option-stack { display: grid; gap: 10px; }
+    .option { display: flex; align-items: center; gap: 13px; padding: 14px; border-radius: 16px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09); }
+    .option-icon { width: 39px; height: 39px; display: grid; place-items: center; flex: 0 0 39px; border-radius: 12px; background: linear-gradient(135deg, rgba(0,225,255,.22), rgba(142,107,255,.28)); font-size: 1.1rem; }
+    .option strong { display: block; font-size: .88rem; }
+    .option span { display: block; margin-top: 2px; color: #8994b1; font-size: .76rem; }
+
+    .outputs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .output { min-height: 165px; padding: 21px 17px; border: 1px solid var(--line); border-radius: 21px; background: rgba(255,255,255,.045); text-align: center; }
+    .output-size { width: 65px; height: 65px; display: grid; place-items: center; margin: 0 auto 16px; border: 1px solid rgba(93,246,255,.48); border-radius: 18px; color: var(--cyan); background: linear-gradient(135deg, rgba(93,246,255,.16), rgba(142,107,255,.18)); font-weight: 900; box-shadow: 0 0 26px rgba(93,246,255,.12); }
+    .output:nth-child(2) .output-size { border-color: rgba(255,209,106,.55); color: var(--gold); }
+    .output:nth-child(3) .output-size { border-color: rgba(255,88,210,.55); color: #ff9be6; }
+    .output:nth-child(4) .output-size { border-color: rgba(142,107,255,.65); color: #c2b5ff; }
+    .output h3 { margin: 0 0 5px; font-size: .95rem; }
+    .output p { margin: 0; color: #8e99b8; font-size: .78rem; line-height: 1.5; }
+
+    .trust-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 19px; }
+    .trust { padding: 17px; border-radius: 17px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.035); }
+    .trust strong { display: block; margin-bottom: 4px; font-size: .86rem; }
+    .trust span { color: #8994b1; font-size: .77rem; line-height: 1.45; }
+
+    .showcase { display: grid; grid-template-columns: .84fr 1.16fr; gap: 60px; align-items: center; }
+    .showcase-visual { position: relative; }
+    .showcase-visual img { width: min(100%, 520px); margin: auto; border-radius: 28px; box-shadow: 28px 30px 70px rgba(0,0,0,.48), 0 0 50px rgba(123,86,255,.22); transform: rotateY(7deg) rotateZ(-2deg); transition: transform .45s ease; }
+    .showcase-visual:hover img { transform: rotateY(0deg) rotateZ(0deg) translateY(-6px); }
+    .showcase-copy h2 { font-size: clamp(2.4rem, 5vw, 4.1rem); line-height: 1; letter-spacing: -.065em; margin: 16px 0 18px; }
+    .showcase-copy p { color: var(--muted); line-height: 1.8; font-size: 1.03rem; }
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 25px 0 30px; }
+    .check { padding: 13px 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; background: rgba(255,255,255,.04); color: #dfe4f7; font-size: .88rem; }
+    .check::first-letter { color: var(--cyan); }
+
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; align-items: start; }
+    .gallery figure { margin: 0; padding: 8px; border-radius: 25px; border: 1px solid var(--line); background: rgba(255,255,255,.045); box-shadow: 0 22px 50px rgba(0,0,0,.22); }
+    .gallery figure:nth-child(2) { transform: translateY(38px); }
+    .gallery img { width: 100%; border-radius: 19px; }
+    .gallery figcaption { padding: 13px 9px 8px; color: #dfe4fa; font-size: .86rem; font-weight: 750; }
+    .gallery figcaption span { display: block; color: #8792b3; font-size: .76rem; font-weight: 500; margin-top: 3px; }
+
+    .feature-banner { position: relative; overflow: hidden; padding: 0; border: 1px solid var(--line); border-radius: 30px; background: var(--surface-strong); }
+    .feature-banner img { width: 100%; height: auto; opacity: .95; }
+    .feature-banner::after { content: ""; position: absolute; inset: auto 0 0; height: 38%; background: linear-gradient(transparent, rgba(6,8,20,.8)); pointer-events: none; }
+
+    .theme-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .theme { padding: 16px 13px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.045); color: #e2e6f8; text-align: center; font-size: .88rem; font-weight: 700; }
+    .theme:nth-child(1), .theme:nth-child(6), .theme:nth-child(11) { color: var(--cyan); }
+    .theme:nth-child(2), .theme:nth-child(7), .theme:nth-child(12) { color: #cbbdff; }
+    .theme:nth-child(3), .theme:nth-child(8), .theme:nth-child(13) { color: #ffb8ea; }
+
+    .download { padding: 62px 35px; border: 1px solid rgba(105, 224, 255, .2); border-radius: 30px; text-align: center; background: radial-gradient(circle at 10% 0, rgba(0,225,255,.18), transparent 28%), radial-gradient(circle at 90% 100%, rgba(255,88,210,.19), transparent 30%), rgba(255,255,255,.05); }
+    .download h2 { font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -.065em; margin: 15px auto; max-width: 800px; }
+    .download p { color: var(--muted); max-width: 620px; margin: 0 auto 26px; }
+    .download .actions { justify-content: center; }
+    .fineprint { margin-top: 20px; color: #7f8baa; font-size: .78rem; }
+
+    footer { border-top: 1px solid rgba(255,255,255,.09); padding: 30px 0 44px; color: #8f99b5; font-size: .84rem; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a { color: #bac2dd; text-decoration: none; }
+    .footer-links a:hover { color: var(--cyan); }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 62px; }
+      .hero-copy { text-align: center; }
+      .hero-copy p { margin-inline: auto; }
+      .actions { justify-content: center; }
+      .hero-art { min-height: 500px; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .workflow-grid, .outputs { grid-template-columns: repeat(2, 1fr); }
+      .studio { grid-template-columns: 1fr; }
+      .showcase { grid-template-columns: 1fr; }
+      .showcase-copy { text-align: center; }
+      .showcase-copy p { margin-inline: auto; max-width: 650px; }
+      .check-grid { max-width: 680px; margin-inline: auto; text-align: left; }
+      .showcase-copy .actions { justify-content: center; }
+    }
+
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      .brand-name { font-size: .91rem; }
+      .hero { min-height: auto; padding: 54px 0 40px; }
+      .hero-copy h1 { font-size: clamp(3rem, 15vw, 4.6rem); }
+      .hero-copy p { font-size: 1rem; }
+      .hero-art { min-height: 420px; }
+      .art-card { width: 95%; }
+      .art-badge { right: 0; bottom: 12px; }
+      section { padding: 75px 0; }
+      .section-heading h2, .showcase-copy h2, .download h2 { font-size: 2.65rem; }
+      .feature-grid, .gallery { grid-template-columns: 1fr; }
+      .workflow-grid, .outputs, .trust-row { grid-template-columns: 1fr; }
+      .gallery figure:nth-child(2) { transform: none; }
+      .gallery figure { max-width: 430px; margin-inline: auto; }
+      .theme-grid { grid-template-columns: repeat(2, 1fr); }
+      .check-grid { grid-template-columns: 1fr; }
+      .tool-list { grid-template-columns: 1fr; }
+      .download { padding: 48px 20px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
-
   </style>
 </head>
-
-
 <body>
-
-<!-- =========================
-     NAVIGATION
-========================== -->
-
-<nav>
-
-  <a href="#" class="brand">
-    <div class="brand-logo">AR</div>
-    <span>AR Techdeveloper</span>
-  </a>
-
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
-    <li><a href="#themes">Themes</a></li>
-    <li><a href="#download">Download</a></li>
-  </ul>
-
-</nav>
-
-
-<!-- =========================
-     HERO
-========================== -->
-
-<header class="hero" id="home">
-
-  <div>
-
-    <div class="developer-tag">
-      Developed by AR Techdeveloper
-    </div>
-
-    <h1>
-      Make Your Phone
-      <span class="gradient-text">
-        Truly Yours.
-      </span>
-    </h1>
-
-    <p>
-      ART Icon Changer & Editor gives you powerful tools to
-      create beautiful custom app icons, stylish widgets,
-      2D & 3D designs and personalised home screen experiences.
-    </p>
-
-    <div class="buttons">
-
-      <!-- ADD YOUR PLAY STORE LINK -->
-      <a
-        class="btn btn-primary"
-        href="#download"
-      >
-        Get ART Icon Editor
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="AR Techdeveloper home">
+        <span class="brand-mark"><span>AR</span></span>
+        <span class="brand-name">AR Techdeveloper</span>
       </a>
-
-      <a
-        class="btn btn-secondary"
-        href="#screenshots"
-      >
-        Explore App
-      </a>
-
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#workflow">How it works</a></li>
+          <li><a href="#showcase">3D Editor</a></li>
+          <li><a href="#screenshots">Screenshots</a></li>
+          <li><a href="#themes">Themes</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-  </div>
-
-
-  <div class="phone-area">
-
-    <div class="phone-glow"></div>
-
-    <div class="phone">
-
-      <!-- MAIN APP SCREENSHOT -->
-      <img
-        src="images/art-icon-editor-main.jpg"
-        alt="ART Icon Changer and Editor app"
-      />
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<!-- =========================
-     FEATURES
-========================== -->
-
-<section id="features">
-
-  <div class="section-head">
-
-    <div class="small-heading">
-      Powerful Features
-    </div>
-
-    <h2>
-      Everything You Need To
-      <span class="gradient-text">
-        Customize
-      </span>
-    </h2>
-
-    <p>
-      Create unique icons and widgets with an easy-to-use
-      editing experience designed for Android users.
-    </p>
-
-  </div>
-
-
-  <div class="features">
-
-    <div class="feature-card">
-      <div class="feature-icon">🎨</div>
-      <h3>Icon Maker</h3>
-      <p>
-        Create beautiful custom icons using built-in styles,
-        designs and creative tools.
-      </p>
-    </div>
-
-
-    <div class="feature-card">
-      <div class="feature-icon">✨</div>
-      <h3>3D Icon Editor</h3>
-      <p>
-        Give icons premium depth, lighting, shadows and
-        eye-catching 3D visual effects.
-      </p>
-    </div>
-
-
-    <div class="feature-card">
-      <div class="feature-icon">🖼️</div>
-      <h3>Gallery & Camera</h3>
-      <p>
-        Use your own pictures from gallery or camera and
-        transform them into customised icon designs.
-      </p>
-    </div>
-
-
-    <div class="feature-card">
-      <div class="feature-icon">📱</div>
-      <h3>1×1 Widget</h3>
-      <p>
-        Create compact personalised shortcut-style widgets
-        for your Android home screen.
-      </p>
-    </div>
-
-
-    <div class="feature-card">
-      <div class="feature-icon">▦</div>
-      <h3>2×2 & 3×3 Widgets</h3>
-      <p>
-        Build larger decorative widgets with custom layouts,
-        images and creative styles.
-      </p>
-    </div>
-
-
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <h3>Live Preview</h3>
-      <p>
-        Preview your custom design while editing so you can
-        perfect the final appearance before applying it.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     SCREENSHOTS
-========================== -->
-
-<section id="screenshots">
-
-  <div class="section-head">
-
-    <div class="small-heading">
-      App Experience
-    </div>
-
-    <h2>
-      Designed To Look
-      <span class="gradient-text">
-        Premium
-      </span>
-    </h2>
-
-    <p>
-      Explore ART Icon Changer & Editor through its
-      modern interface and creative editing tools.
-    </p>
-
-  </div>
-
-
-  <div class="screenshots-wrapper">
-
-    <div class="screenshots">
-
-      <div class="screen">
-        <img
-          src="images/screenshot1.jpg"
-          alt="ART Icon Editor Screenshot 1"
-        />
+  <main id="top">
+    <section class="wrap hero">
+      <div class="hero-copy">
+        <div class="eyebrow">ART Icon Changer &amp; Editor</div>
+        <h1>Your icons.<br><span class="gradient">Your style.</span></h1>
+        <p>Create custom icons from a Blank Canvas, fine-tune photos and shapes, explore 3D Fusion, and build a home screen that feels like you.</p>
+        <div class="actions">
+          <a class="button button-primary" href="#download">Explore ART Icon Editor</a>
+          <a class="button button-ghost" href="#screenshots">See the app</a>
+        </div>
+        <div class="hero-note">Designed for Android • Built by AR Techdeveloper</div>
       </div>
 
-      <div class="screen">
-        <img
-          src="images/screenshot2.jpg"
-          alt="ART Icon Editor Screenshot 2"
-        />
+      <div class="hero-art" aria-label="ART Icon Changer and Editor Blank Canvas promotional showcase">
+        <div class="art-card">
+          <img src="images/blank-canvas-showcase.png" alt="ART Icon Editor Blank Canvas on a premium tilted mobile phone" />
+          <div class="art-badge"><strong>Start from Blank Canvas</strong><span>Create without selecting an app</span></div>
+        </div>
       </div>
+    </section>
 
-      <div class="screen">
-        <img
-          src="images/screenshot3.jpg"
-          alt="ART Icon Editor Screenshot 3"
-        />
+    <section id="features">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Made for creative home screens</div>
+          <h2>Everything you need to <span class="gradient">make it yours.</span></h2>
+          <p>One focused workspace for icon design, live preview, 3D effects and decorative widgets.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature"><div class="feature-icon">✦</div><h3>Blank Canvas</h3><p>Start a custom icon from a blank canvas without choosing an installed app first.</p></article>
+          <article class="feature"><div class="feature-icon">◈</div><h3>2D &amp; 3D Editing</h3><p>Shape, scale, rotate and style your artwork with depth, lighting and Fusion effects.</p></article>
+          <article class="feature"><div class="feature-icon">⌁</div><h3>Live Preview</h3><p>Fine-tune photos, text, colours and shapes while seeing the design evolve.</p></article>
+          <article class="feature"><div class="feature-icon">▣</div><h3>Custom Images</h3><p>Bring ideas from your gallery or camera into a personalised icon design.</p></article>
+          <article class="feature"><div class="feature-icon">▦</div><h3>Widget Maker</h3><p>Create supported home-screen widgets in 1×1, 2×2 and 3×3 sizes.</p></article>
+          <article class="feature"><div class="feature-icon">♥</div><h3>Creative Themes</h3><p>Explore neon, glass, love, galaxy, pastel, gold and many more visual directions.</p></article>
+        </div>
       </div>
+    </section>
 
-      <div class="screen">
-        <img
-          src="images/screenshot4.jpg"
-          alt="ART Icon Editor Screenshot 4"
-        />
+    <section id="workflow">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">A simple creative flow</div>
+          <h2>From an idea to an icon in <span class="gradient">four moves.</span></h2>
+          <p>ART Icon Changer &amp; Editor keeps the creative journey clear, whether you start with an installed app or a completely blank canvas.</p>
+        </div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><span class="workflow-tag">Choose</span><h3>Pick your starting point</h3><p>Browse installed apps with an edited-icon preview, or open Blank Canvas for a brand-new design.</p></article>
+          <article class="workflow-card"><span class="workflow-tag">Create</span><h3>Use your favourite source</h3><p>Choose a pre-installed icon, use the original app icon, import an image, or add a photo from Gallery or Camera.</p></article>
+          <article class="workflow-card"><span class="workflow-tag">Customize</span><h3>Make every detail yours</h3><p>Work with text, colours, shapes, filters, position, scale, rotation, live preview and 3D Fusion effects.</p></article>
+          <article class="workflow-card"><span class="workflow-tag">Apply</span><h3>Save the result your way</h3><p>Create a shortcut, widget or decorative on-screen icon, then keep designs organised with Favorites and Import/Export.</p></article>
+        </div>
       </div>
+    </section>
 
+    <section>
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">A complete icon studio</div>
+          <h2>More control. <span class="gradient">More ways to create.</span></h2>
+          <p>Everything is arranged around the way people actually make and reuse home-screen designs.</p>
+        </div>
+        <div class="studio">
+          <article class="studio-panel">
+            <h3>Editing tools in one place</h3>
+            <p>Build a design from your own visual language and see the result before you save it.</p>
+            <div class="tool-list">
+              <div class="tool"><b>✦</b> Pre-installed icon library</div>
+              <div class="tool"><b>◎</b> Original app icon set</div>
+              <div class="tool"><b>▧</b> Gallery and Camera</div>
+              <div class="tool"><b>♥</b> Favorites collection</div>
+              <div class="tool"><b>3D</b> 3D Fusion section</div>
+              <div class="tool"><b>⌁</b> Live rendering preview</div>
+              <div class="tool"><b>↕</b> Position and alignment</div>
+              <div class="tool"><b>⇄</b> Import and Export</div>
+            </div>
+          </article>
+          <article class="studio-panel">
+            <h3>Pick your creation mode</h3>
+            <p>Use the output that fits your home screen and your creative idea.</p>
+            <div class="option-stack">
+              <div class="option"><div class="option-icon">▣</div><div><strong>App icon shortcut</strong><span>Personalised shortcut-style icon for your home screen</span></div></div>
+              <div class="option"><div class="option-icon">▦</div><div><strong>Decorative icon</strong><span>Place a design on screen without changing an app</span></div></div>
+              <div class="option"><div class="option-icon">◈</div><div><strong>Widget creation</strong><span>Choose a 1×1, 2×2 or 3×3 widget layout</span></div></div>
+              <div class="option"><div class="option-icon">★</div><div><strong>Save and reuse</strong><span>Keep favourite styles ready for future designs</span></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="showcase">
+      <div class="wrap showcase">
+        <div class="showcase-visual">
+          <img src="images/three-d-fusion-showcase.png" alt="ART Icon Editor 3D Fusion editor on a premium mobile phone" loading="lazy" />
+        </div>
+        <div class="showcase-copy">
+          <div class="eyebrow">Create in 3D. Render live.</div>
+          <h2>Give your icons a <span class="gradient">new dimension.</span></h2>
+          <p>Build a visual identity for your home screen with editable shapes, live rendering and 3D Fusion. The promotional artwork shows the app experience in a premium presentation.</p>
+          <div class="check-grid">
+            <div class="check">✓ Shape and depth controls</div>
+            <div class="check">✓ Rotation and scale</div>
+            <div class="check">✓ Live rendering preview</div>
+            <div class="check">✓ 3D Fusion effects</div>
+          </div>
+          <div class="actions"><a class="button button-primary" href="#screenshots">View editing screens</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Choose the final format</div>
+          <h2>One design. <span class="gradient">Four possibilities.</span></h2>
+          <p>Turn the same creative idea into an app shortcut, decorative icon or widget that suits your launcher.</p>
+        </div>
+        <div class="outputs">
+          <article class="output"><div class="output-size">1×1</div><h3>Shortcut</h3><p>Compact personalised shortcut-style output.</p></article>
+          <article class="output"><div class="output-size">1×1</div><h3>Widget</h3><p>Small widget format for a focused home-screen accent.</p></article>
+          <article class="output"><div class="output-size">2×2</div><h3>Large widget</h3><p>More space for artwork, text and visual detail.</p></article>
+          <article class="output"><div class="output-size">3×3</div><h3>Decorative layout</h3><p>Make a bold home-screen statement with a larger canvas.</p></article>
+        </div>
+        <div class="trust-row">
+          <div class="trust"><strong>Original apps stay unchanged</strong><span>Create personalised shortcuts and designs on your device.</span></div>
+          <div class="trust"><strong>Save locally</strong><span>Your finished artwork can remain available in your own app workflow.</span></div>
+          <div class="trust"><strong>Launcher-friendly note</strong><span>Widget appearance and availability can vary by device and launcher.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Inside the editor</div>
+          <h2>Design it. <span class="gradient">See it live.</span></h2>
+          <p>Explore the editing, live preview and widget-making experiences behind ART Icon Changer &amp; Editor.</p>
+        </div>
+        <div class="gallery">
+          <figure><img src="images/live-preview.png" alt="ART Icon Editor live preview and Tune and Adjust controls" loading="lazy" /><figcaption>Live Preview<span>Fine-tune your design in real time</span></figcaption></figure>
+          <figure><img src="images/tune-adjust.png" alt="ART Icon Editor filters, shapes, scale and rotation screen" loading="lazy" /><figcaption>Fine-tune &amp; adjust<span>Filters, shapes, scale and rotation</span></figcaption></figure>
+          <figure><img src="images/widget-maker.png" alt="ART Icon Editor widget maker for 1x1, 2x2 and 3x3 widgets" loading="lazy" /><figcaption>Small icons. Big widgets.<span>1×1 • 2×2 • 3×3 widget maker</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="feature-banner"><img src="images/feature-graphic.png" alt="ART Icon Changer and Editor feature graphic with colourful icon artwork" loading="lazy" /></div>
+      </div>
+    </section>
+
+    <section id="themes">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Creative collection</div>
+          <h2>Find a look that feels <span class="gradient">like you.</span></h2>
+          <p>Mix and match visual inspiration for a home screen with its own personality.</p>
+        </div>
+        <div class="theme-grid">
+          <div class="theme">Neon Glow</div><div class="theme">Dark Glass</div><div class="theme">Crystal Glass</div><div class="theme">Aurora Gradient</div><div class="theme">Gold Luxury</div>
+          <div class="theme">Titanium</div><div class="theme">3D Soft</div><div class="theme">Clay 3D</div><div class="theme">Pastel</div><div class="theme">Cyberpunk</div>
+          <div class="theme">Galaxy</div><div class="theme">Love</div><div class="theme">Fire &amp; Flame</div><div class="theme">Ice &amp; Frost</div><div class="theme">Nature</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="wrap download">
+        <div class="eyebrow">AR Techdeveloper</div>
+        <h2>Make your home screen <span class="gradient">your own.</span></h2>
+        <p>Start with a Blank Canvas, explore 3D designs and create a visual style that belongs to you.</p>
+        <div class="actions">
+          <!-- Replace # with your final Google Play listing URL before publishing. -->
+          <a class="button button-primary" href="#">Get it on Google Play</a>
+          <a class="button button-ghost" href="https://artechdeveloper.github.io/Privacy/terms.html" target="_blank" rel="noopener">Terms &amp; Privacy</a>
+        </div>
+        <div class="fineprint">Widget appearance and availability may vary by device, Android version and launcher.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>© 2026 AR Techdeveloper. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="https://artechdeveloper.github.io/Privacy/" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="https://artechdeveloper.github.io/Privacy/terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+        <a href="mailto:YOUR-EMAIL@gmail.com">Contact</a>
+      </div>
     </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     APP SHOWCASE
-========================== -->
-
-<div class="showcase">
-
-  <div>
-
-    <div class="small-heading">
-      ART Icon Changer & Editor
-    </div>
-
-    <h2>
-      Your Creativity.
-      <span class="gradient-text">
-        Your Home Screen.
-      </span>
-    </h2>
-
-    <p>
-      ART Icon Changer & Editor combines icon creation,
-      2D/3D editing, widgets, custom images and stylish
-      visual themes into one creative Android application.
-    </p>
-
-    <div class="mini-features">
-
-      <div class="mini-item">
-        ✓ Custom App Icons
-      </div>
-
-      <div class="mini-item">
-        ✓ 3D Rendering
-      </div>
-
-      <div class="mini-item">
-        ✓ Image Customization
-      </div>
-
-      <div class="mini-item">
-        ✓ Live Preview
-      </div>
-
-      <div class="mini-item">
-        ✓ Decorative Widgets
-      </div>
-
-      <div class="mini-item">
-        ✓ Multiple Icon Themes
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="showcase-image">
-
-    <img
-      src="images/editor-screen.jpg"
-      alt="ART Icon Editor 3D Editing Screen"
-    />
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     THEMES
-========================== -->
-
-<section id="themes">
-
-  <div class="section-head">
-
-    <div class="small-heading">
-      Creative Collection
-    </div>
-
-    <h2>
-      Beautiful
-      <span class="gradient-text">
-        Icon Themes
-      </span>
-    </h2>
-
-  </div>
-
-
-  <div class="theme-grid">
-
-    <div class="theme">💜 Neon Glow</div>
-
-    <div class="theme">🖤 Dark Glass</div>
-
-    <div class="theme">💎 Crystal Glass</div>
-
-    <div class="theme">🌈 Aurora Gradient</div>
-
-    <div class="theme">👑 Gold Luxury</div>
-
-    <div class="theme">⚙ Titanium</div>
-
-    <div class="theme">🧊 3D Soft</div>
-
-    <div class="theme">🎨 Clay 3D</div>
-
-    <div class="theme">🌸 Pastel</div>
-
-    <div class="theme">⚡ Cyberpunk</div>
-
-    <div class="theme">🌌 Galaxy</div>
-
-    <div class="theme">❤️ Love</div>
-
-    <div class="theme">🔥 Fire & Flame</div>
-
-    <div class="theme">❄ Ice & Frost</div>
-
-    <div class="theme">🌿 Nature</div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     DOWNLOAD
-========================== -->
-
-<div class="download" id="download">
-
-  <div class="small-heading">
-    AR Techdeveloper
-  </div>
-
-  <h2>
-    Start Creating Your
-    <span class="gradient-text">
-      Perfect Home Screen
-    </span>
-  </h2>
-
-  <p>
-    Customize your Android experience with ART Icon
-    Changer & Editor. Create icons, design widgets and
-    give your home screen a completely new identity.
-  </p>
-
-
-  <!-- CHANGE # TO YOUR PLAY STORE URL -->
-
-  <a
-    href="#"
-    class="btn btn-primary"
-    target="_blank"
-  >
-    ▶ Get it on Google Play
-  </a>
-
-</div>
-
-
-<!-- =========================
-     FOOTER
-========================== -->
-
-<footer>
-
-  <div class="footer-content">
-
-    <div>
-      © 2026 AR Techdeveloper.
-      All rights reserved.
-    </div>
-
-    <div>
-
-      <!-- CHANGE THESE LINKS -->
-
-      <a
-        href="https://artechdeveloper.github.io/Privacy/"
-      >
-        Privacy Policy
-      </a>
-
-      <a
-        href="https://artechdeveloper.github.io/Privacy/terms.html"
-      >
-        Terms & Conditions
-      </a>
-
-      <a href="mailto:YOUR-EMAIL@gmail.com">
-        Contact
-      </a>
-
-    </div>
-
-  </div>
-
-</footer>
-
-
-<script>
-
-  /*
-    Simple 3D interaction for main mobile preview
-  */
-
-  const phone = document.querySelector(".phone");
-  const phoneArea = document.querySelector(".phone-area");
-
-  if (phone && phoneArea) {
-
-    phoneArea.addEventListener("mousemove", function(e) {
-
-      const rect = phoneArea.getBoundingClientRect();
-
-      const x =
-        (e.clientX - rect.left) / rect.width - 0.5;
-
-      const y =
-        (e.clientY - rect.top) / rect.height - 0.5;
-
-      phone.style.animation = "none";
-
-      phone.style.transform =
-        `rotateY(${x * 25}deg)
-         rotateX(${-y * 20}deg)
-         rotateZ(2deg)`;
-
-    });
-
-
-    phoneArea.addEventListener("mouseleave", function() {
-
-      phone.style.animation =
-        "phoneFloat 5s ease-in-out infinite";
-
-    });
-
-  }
-
-</script>
-
+  </footer>
 </body>
 </html>
