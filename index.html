@@ -122,6 +122,12 @@
     .button-primary { background: linear-gradient(105deg, #00c9e8, #7658ff 55%, #ed47c7); box-shadow: 0 13px 35px rgba(104, 84, 255, .28); }
     .button-primary:hover { box-shadow: 0 18px 45px rgba(104, 84, 255, .42); }
     .button-ghost { border: 1px solid var(--line); background: rgba(255,255,255,.045); color: #e7eaff; }
+    .button-video { border: 1px solid rgba(93,246,255,.3); color: #dfffff; background: linear-gradient(135deg, rgba(93,246,255,.12), rgba(142,107,255,.16)); box-shadow: 0 12px 30px rgba(93,246,255,.1); }
+    .button-video::before { content: "▶"; margin-right: 9px; color: var(--cyan); font-size: .72rem; }
+    .button-video:hover { border-color: rgba(93,246,255,.65); background: linear-gradient(135deg, rgba(93,246,255,.2), rgba(142,107,255,.24)); }
+    .banner-watch { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 10px 14px; border: 1px solid rgba(255,255,255,.24); border-radius: 12px; color: #071020; background: linear-gradient(105deg, #67f8ff, #b1a1ff 58%, #ff91dc); box-shadow: 0 12px 30px rgba(93,246,255,.2); cursor: pointer; font: inherit; font-size: .75rem; font-weight: 900; transition: transform .25s ease, box-shadow .25s ease; }
+    .banner-watch:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(93,246,255,.34); }
+    .banner-watch span { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; color: #fff; background: rgba(7,16,32,.72); font-size: .55rem; }
     .hero-note { margin-top: 27px; color: #7f8baa; font-size: .82rem; }
     .hero-metrics { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
     .hero-metric { min-width: 112px; padding: 12px 13px; border: 1px solid rgba(255,255,255,.1); border-radius: 15px; background: rgba(255,255,255,.04); }
@@ -147,6 +153,22 @@
     .hero-icon-one { left: 7%; top: 18%; animation: iconFloatTwo 5.2s ease-in-out infinite; }
     .hero-icon-two { right: 5%; top: 12%; animation: iconFloatOne 6.3s ease-in-out .4s infinite reverse; }
     .hero-art-note { position: absolute; z-index: 5; left: 50%; bottom: 6%; display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; color: #b8c3df; background: rgba(7,11,28,.7); box-shadow: 0 12px 26px rgba(0,0,0,.2); backdrop-filter: blur(12px); font-size: .68rem; font-weight: 800; white-space: nowrap; transform: translateX(-50%); }
+
+    .video-modal[hidden] { display: none; }
+    .video-modal { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 22px; opacity: 0; transition: opacity .24s ease; }
+    .video-modal.is-open { opacity: 1; }
+    .video-backdrop { position: absolute; inset: 0; background: rgba(2,4,13,.84); backdrop-filter: blur(18px); }
+    .video-dialog { position: relative; z-index: 1; width: min(980px, 100%); padding: 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 26px; background: linear-gradient(145deg, rgba(25,34,70,.96), rgba(8,12,28,.96)); box-shadow: 0 32px 100px rgba(0,0,0,.6), 0 0 60px rgba(93,246,255,.12); transform: translateY(14px) scale(.98); transition: transform .28s cubic-bezier(.2,.75,.25,1); }
+    .video-modal.is-open .video-dialog { transform: none; }
+    .video-frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 18px; background: #03050c; }
+    .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .video-close { position: absolute; z-index: 3; top: -17px; right: -17px; width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.24); border-radius: 50%; color: #fff; background: rgba(13,18,39,.94); box-shadow: 0 12px 25px rgba(0,0,0,.35); cursor: pointer; font-size: 1.45rem; line-height: 1; }
+    .video-close:hover { color: var(--cyan); border-color: rgba(93,246,255,.65); }
+    .video-meta { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 8px 3px; color: #dfe7ff; font-size: .83rem; font-weight: 800; }
+    .video-meta span { color: #8d99bb; font-size: .74rem; font-weight: 600; }
+    .video-meta a { color: var(--cyan); text-decoration: none; font-size: .75rem; }
+    .video-meta a:hover { text-decoration: underline; }
+    body.modal-open { overflow: hidden; }
 
     .hero-copy { animation: heroCopyIn .9s cubic-bezier(.2,.75,.25,1) both; }
     .hero-art { animation: heroArtIn 1.05s cubic-bezier(.2,.75,.25,1) .08s both; }
@@ -410,6 +432,10 @@
       .hero-icon-one { left: 3%; top: 20%; }
       .hero-icon-two { right: 1%; top: 13%; }
       .hero-art-note { bottom: 0; font-size: .62rem; }
+      .video-modal { padding: 14px; }
+      .video-dialog { padding: 7px; border-radius: 21px; }
+      .video-close { top: 8px; right: 8px; width: 36px; height: 36px; }
+      .video-meta { align-items: flex-start; flex-direction: column; padding: 12px 5px 3px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -458,6 +484,7 @@
       <div class="banner-kicker"><span class="live-dot"></span> ART ICON CHANGER &amp; EDITOR</div>
       <strong class="banner-title">A richer way to shape your screen.</strong>
       <div class="banner-tags"><span>2D + 3D</span><span>Live Preview</span><span>Widget Maker</span></div>
+      <button class="banner-watch" type="button" data-video-open><span>▶</span> Bring Ideas to Life</button>
     </div>
     <div class="icon-scene" aria-hidden="true">
       <div class="orbit-ring orbit-ring-one"></div>
@@ -478,6 +505,7 @@
         <div class="actions">
           <a class="button button-primary" href="#download">Explore ART Icon Editor</a>
           <a class="button button-ghost" href="#screenshots">See the app</a>
+          <button class="button button-video" type="button" data-video-open>Bring Ideas to Life</button>
         </div>
         <div class="hero-note">Designed for Android • Built by AR Techdeveloper</div>
         <div class="hero-metrics" aria-label="Key app capabilities">
@@ -706,6 +734,20 @@
       </div>
     </div>
   </footer>
+
+  <div class="video-modal" id="videoModal" hidden role="dialog" aria-modal="true" aria-labelledby="videoTitle">
+    <div class="video-backdrop" data-video-close></div>
+    <div class="video-dialog">
+      <button class="video-close" type="button" aria-label="Close video" data-video-close>×</button>
+      <div class="video-frame">
+        <iframe id="videoFrame" title="ART Icon Changer and Editor 3D demo" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="video-meta">
+        <div><span id="videoTitle">ART Icon Changer &amp; Editor</span><br><span>Watch the creative 3D experience</span></div>
+        <a href="https://www.youtube.com/watch?v=NtOWf2-7ObA" target="_blank" rel="noopener">Open on YouTube ↗</a>
+      </div>
+    </div>
+  </div>
   <script>
     const menuButton = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('#mobileMenu');
@@ -723,6 +765,39 @@
       menuButton?.setAttribute('aria-label', 'Open navigation');
       if (menuButton) menuButton.textContent = '☰';
     }));
+
+    const videoModal = document.querySelector('#videoModal');
+    const videoFrame = document.querySelector('#videoFrame');
+    const videoCloseButtons = document.querySelectorAll('[data-video-close]');
+    const videoEmbedUrl = 'https://www.youtube.com/embed/NtOWf2-7ObA?autoplay=1&rel=0&playsinline=1';
+    let videoPreviousFocus = null;
+
+    const openVideo = () => {
+      if (!videoModal || !videoFrame) return;
+      videoPreviousFocus = document.activeElement;
+      videoModal.hidden = false;
+      videoFrame.src = videoEmbedUrl;
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => videoModal.classList.add('is-open'));
+      videoModal.querySelector('.video-close')?.focus();
+    };
+
+    const closeVideo = () => {
+      if (!videoModal || videoModal.hidden) return;
+      videoModal.classList.remove('is-open');
+      document.body.classList.remove('modal-open');
+      window.setTimeout(() => {
+        videoModal.hidden = true;
+        videoFrame.src = 'about:blank';
+        videoPreviousFocus?.focus?.();
+      }, 240);
+    };
+
+    document.querySelectorAll('[data-video-open]').forEach((button) => button.addEventListener('click', openVideo));
+    videoCloseButtons.forEach((button) => button.addEventListener('click', closeVideo));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeVideo();
+    });
 
     const revealItems = document.querySelectorAll('.section-heading, .feature, .workflow-card, .studio-panel, .showcase, .rendering-layout, .rendering-card, .rendering-copy, .output, .trust, .gallery figure, .feature-banner, .theme, .download');
     revealItems.forEach((item) => item.classList.add('reveal'));
